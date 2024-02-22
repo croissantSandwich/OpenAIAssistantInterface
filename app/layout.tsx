@@ -6,9 +6,9 @@ import { cn } from "@/lib/utils";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Fatimah (Beta)",
+  title: "Farah (Beta)",
   description:
-    "Fatimah is a virtual assistant that helps you find halal food and travel destinations.",
+    "Farah is a virtual assistant that helps you find halal food and travel destinations.",
 };
 
 export default function RootLayout({

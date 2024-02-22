@@ -55,7 +55,7 @@ const DotAnimation = () => {
 };
 
 const Chat = () => {
-  const prompt = "Ask Fatimah...";
+  const prompt = "Ask Farah...";
   const [messages, setMessages] = useState<Message[]>([]);
   const [message, setMessage] = useState<string>(prompt);
   const [file, setFile] = useState<File | undefined>(undefined);
@@ -145,7 +145,7 @@ const Chat = () => {
     <main className="flex min-h-screen flex-col p-24">
       <div className="flex flex-col w-full max-w-xl mx-auto stretch">
         <h1 className="text-3xl text-zinc-100 font-extrabold pb-4">
-          Fatimah - Virtual Halal Travel Guide 🧕🏻
+          Farah - Virtual Halal Travel Guide 🧕🏻
         </h1>
         {error != null && (
           <div className="relative bg-red-500 text-white px-6 py-4 rounded-md">
