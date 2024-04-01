@@ -11,9 +11,9 @@ import { motion } from "framer-motion";
 
 const roleToColorMap: Record<Message["role"], string> = {
   system: "lightred",
-  user: "black",
+  user: "custom-black",
   function: "lightblue",
-  assistant: "white",
+  assistant: "custom-white",
   data: "lightyellow",
   tool: "lightpurple",
 };
@@ -158,7 +158,7 @@ const Chat = () => {
         {messages.map((m: Message) => (
           <div
             key={m.id}
-            className={`min-w-0 mr-2 py-1 px-4 my-2 pt-3  whitespace-pre-wrap inline-block ${
+            className={`min-w-0 mr-2 py-1 px-4 my-2 pt-3 whitespace-pre-wrap inline-block ${
               m.role === "user"
                 ? "float-right bg-custom-green text-custom-white text-right rounded-bl-3xl rounded-tl-3xl rounded-tr-xl"
                 : "float-left bg-custom-yellow text-custom-black text-left rounded-br-3xl rounded-tr-3xl rounded-tl-xl"
@@ -177,11 +177,16 @@ const Chat = () => {
           </div>
         ))}
 
+        <div style={{ clear: "both" }}></div>
+
         {status === "in_progress" && (
-          <div className="min-w-0 mr-2 py-1 px-4 my-2 pt-3 whitespace-pre-wrap float-left bg-custom-yellow text-custom-black  text-left rounded-br-3xl rounded-tr-3xl rounded-tl-xl flex">
-            <Icons.spinner className="animate-spin w-5 h-5" />
-            Fetching data
-            <DotAnimation />
+          <div className="min-w-0 mr-2 py-1 px-4 my-2 pt-3 whitespace-pre-wrap bg-custom-yellow text-custom-black text-left rounded-br-3xl rounded-tr-3xl rounded-tl-xl inline-flex flex-col">
+            <strong>Farah</strong>
+            <div className="flex gap-x-2">
+              <Icons.spinner className="animate-spin w-5 h-5" />
+              Fetching data
+              <DotAnimation />
+            </div>
             <br />
           </div>
         )}
