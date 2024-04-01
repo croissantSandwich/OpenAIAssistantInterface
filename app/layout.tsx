@@ -18,7 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={cn(inter.className, "overscroll-none bg-neutral-900")}>
+      <body className={cn(inter.className, "overscroll-none bg-custom-white")}>
         {children}
       </body>
     </html>

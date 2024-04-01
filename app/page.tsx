@@ -11,9 +11,9 @@ import { motion } from "framer-motion";
 
 const roleToColorMap: Record<Message["role"], string> = {
   system: "lightred",
-  user: "white",
+  user: "black",
   function: "lightblue",
-  assistant: "lightgreen",
+  assistant: "white",
   data: "lightyellow",
   tool: "lightpurple",
 };
@@ -143,12 +143,12 @@ const Chat = () => {
 
   return (
     <main className="flex min-h-screen flex-col p-24">
-      <div className="flex flex-col w-full max-w-xl mx-auto stretch">
-        <h1 className="text-3xl text-zinc-100 font-extrabold pb-4">
+      <div className="flex-col w-full max-w-xl mx-auto inline-block">
+        <h1 className="text-3xl text-custom-black font-extrabold pb-4">
           Farah - Virtual Halal Travel Guide 🧕🏻
         </h1>
         {error != null && (
-          <div className="relative bg-red-500 text-white px-6 py-4 rounded-md">
+          <div className="relative bg-red-500 text-custom-white px-6 py-4 rounded-md">
             <span className="block sm:inline">
               Error: {(error as any).toString()}
             </span>
@@ -158,32 +158,49 @@ const Chat = () => {
         {messages.map((m: Message) => (
           <div
             key={m.id}
-            className="whitespace-pre-wrap"
+            className={`min-w-0 mr-2 py-1 px-4 my-2 pt-3  whitespace-pre-wrap ${
+              m.role === "user"
+                ? "float-right bg-custom-green text-custom-white text-right rounded-bl-3xl rounded-tl-3xl rounded-tr-xl"
+                : "float-left bg-custom-yellow text-custom-black text-left rounded-br-3xl rounded-tr-3xl rounded-tl-xl"
+            }`}
             style={{ color: roleToColorMap[m.role] }}
           >
-            <strong>{`${m.role}: `}</strong>
+            <strong>{`${
+              m.role === "assistant"
+                ? "Farah"
+                : m.role === "user"
+                ? "You"
+                : m.role
+            } `}</strong>
             <ReactMarkdown>{m.content}</ReactMarkdown>
-            <br />
             <br />
           </div>
         ))}
 
         {status === "in_progress" && (
-          <span className="text-white flex gap-x-2">
+          <div className="min-w-0 mr-2 py-1 px-4 my-2 pt-3 whitespace-pre-wrap float-left bg-custom-yellow text-custom-black  text-left rounded-br-3xl rounded-tr-3xl rounded-tl-xl flex">
             <Icons.spinner className="animate-spin w-5 h-5" />
             Fetching data
             <DotAnimation />
-          </span>
+            <br />
+          </div>
         )}
 
         <form
           onSubmit={handleFormSubmit}
-          className="flex items-start flex-col p-4 pb-2 text-white max-w-xl bg-black mx-auto fixed bottom-0 w-full mb-8 border border-gray-300 rounded-xl shadow-xl"
+          className="flex items-start flex-col p-4 pb-0 text-custom-black max-w-xl bg-custom-green-dark mx-auto fixed bottom-0 w-full mb-8 rounded-xl shadow-xl"
         >
+          {/* {status === "in_progress" && (
+            <span className="text-white flex gap-x-2 float-end">
+              <Icons.spinner className="animate-spin w-5 h-5" />
+              Fetching data
+              <DotAnimation />
+            </span>
+          )} */}
           <div className="flex items-start w-full">
             <Input
               disabled={status !== "awaiting_message"}
-              className="flex-1 placeholder:text-white bg-neutral-900"
+              className="flex-1 placeholder:text-custom-black bg-custom-green"
               placeholder={prompt}
               onChange={handleMessageChange}
             />
@@ -193,7 +210,7 @@ const Chat = () => {
               type="submit"
               disabled={status !== "awaiting_message"}
             >
-              <Icons.arrowRight className="text-gray-200 hover:text-white transition-colors duration-200 ease-in-out" />
+              <Icons.arrowRight className="text-custom-white hover:text-custom-green transition-colors duration-200 ease-in-out" />
             </Button>
           </div>
 
@@ -201,7 +218,7 @@ const Chat = () => {
             type="button"
             disabled={status !== "awaiting_message"}
             onClick={handleOpenFileExplorer}
-            className="flex gap-x-1 group cursor-pointer text-gray-200 px-1 pb-0"
+            className="flex gap-x-1 group cursor-pointer text-custom-black px-1 pb-0"
           >
             {/* <input
               type="file"
